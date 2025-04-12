@@ -1,4 +1,4 @@
-# MelodayzWeb
+# MelodayzMusic
 
 MelodayzWeb is a web application designed to provide an engaging and seamless music experience for users.
 
