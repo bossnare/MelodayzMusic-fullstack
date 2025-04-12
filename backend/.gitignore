@@ -1,0 +1,38 @@
+###> symfony/framework-bundle ###
+.env.local
+.env.local.php
+.env.*.local
+.env.dev
+.env
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/public/uploads
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+
+# Docker
+/docker-compose.override.yml
+/docker/
+
+# IDE-specific files
+.vscode/
+.idea/
+*.iml
+
+# Logs
+/logs/
+/var/log/
+
+# Node.js (raha mampiasa Node.js koa ianao)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Symfony Cache
+/var/cache/

@@ -1,0 +1,91 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    env(MONGODB_URL): "mongodb://localhost:27017"
+    env(MONGODB_DB): "melodayz"
+
+services:
+    # Default configuration for services in this file
+    _defaults:
+        autowire: true # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # Makes classes in src/ available to be used as services
+    App\:
+        resource: "../src/"
+        exclude:
+            - "../src/DependencyInjection/"
+            - "../src/Document/"
+            - "../src/Kernel.php"
+
+        # For repositories
+    # App\Repository\UserRepository:
+    #     arguments:
+    #         $dm: "@doctrine_mongodb.odm.document_manager"
+    #         $uow: "@doctrine_mongodb.odm.unit_of_work"
+
+    # App\Repository\ActivityRepository:
+    #     arguments:
+    #         $dm: "@doctrine_mongodb.odm.document_manager"
+    #         $uow: "@doctrine_mongodb.odm.unit_of_work"
+
+    # # config/services.yaml
+    # App\Repository\AlbumRepository:
+    #     arguments:
+    #         $dm: "@doctrine_mongodb.odm.document_manager"
+    #         $uow: "@doctrine_mongodb.odm.unit_of_work"
+
+    # App\Repository\AlbumSongRepository:
+    #     arguments:
+    #         $dm: "@doctrine_mongodb.odm.document_manager"
+    #         $uow: "@doctrine_mongodb.odm.unit_of_work"
+
+    # App\Repository\CommentsRepository:
+    #     arguments:
+    #         $dm: "@doctrine_mongodb.odm.document_manager"
+    #         $uow: "@doctrine_mongodb.odm.unit_of_work"
+
+    # App\Repository\FavoriteRepository:
+    #     arguments:
+    #         $dm: "@doctrine_mongodb.odm.document_manager"
+    #         $uow: "@doctrine_mongodb.odm.unit_of_work"
+
+    # App\Repository\ListeningHistoryRepository:
+    #     arguments:
+    #         $dm: "@doctrine_mongodb.odm.document_manager"
+    #         $uow: "@doctrine_mongodb.odm.unit_of_work"
+
+    # App\Repository\PlaylistRepository:
+    #     arguments:
+    #         $dm: "@doctrine_mongodb.odm.document_manager"
+    #         $uow: "@doctrine_mongodb.odm.unit_of_work"
+
+    # App\Repository\ProfilePictureRepository:
+    #     arguments:
+    #         $dm: "@doctrine_mongodb.odm.document_manager"
+    #         $uow: "@doctrine_mongodb.odm.unit_of_work"
+
+    # App\Repository\SongRepository:
+    #     arguments:
+    #         $dm: "@doctrine_mongodb.odm.document_manager"
+    #         $uow: "@doctrine_mongodb.odm.unit_of_work"
+
+    # App\Repository\SongCoverRepository:
+    #     arguments:
+    #         $dm: "@doctrine_mongodb.odm.document_manager"
+    #         $uow: "@doctrine_mongodb.odm.unit_of_work"
+
+    # custom event listener manampy payload
+    App\EventListener\JWTCreatedListener:
+        tags:
+            - {
+                  name: "kernel.event_listener",
+                  event: "lexik_jwt_authentication.on_jwt_created",
+                  method: "onJWTCreated",
+              }
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones

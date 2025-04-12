@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+/* Plugins tailwind */
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+/* base: style default */
+@layer base {
+  button,
+  input[type="file"] {
+    cursor: pointer;
+  }
+
+  input[type="text"] {
+    @apply !ring-0 !outline-hidden border-0
+  }
+
+  input[type="file"]::-webkit-file-upload-button {
+    background: gray;
+    padding: 5px;
+    cursor: pointer;
+  }
+  button a {
+    @apply select-none;
+  }
+
+  body {
+    font-family: "Inter", sans-serif;
+    overflow-y: scroll;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply bg-[#F7F7F7] text-[#333333];
+  }
+
+  /* manala default */
+  body::-webkit-scrollbar {
+    background: transparent;
+    width: 10px;
+  }
+  /* mampiditra custom */
+  body::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+  /* body::-webkit-scrollbar-button {
+        display: block;
+        @apply bg-gray-400 size-2;
+    } */
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  #side-bar {
+    transition: scrollbar-color 300ms ease-in-out;
+  }
+
+  #side-bar::-webkit-scrollbar {
+    width: 8px;
+    transition: width 300ms ease-in-out;
+  }
+
+  #side-bar::-webkit-scrollbar {
+    background: transparent;
+  }
+
+  #side-bar:hover::-webkit-scrollbar-thumb {
+    @apply bg-gray-200 rounded-full;
+  }
+
+  /* Mampisy style amin'ny track (bar) */
+/* input[type="range"]::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, #8a2be2, #00d4ff);
+    height: 6px;
+    border-radius: 5px;
+  }
+  
+  /* Custom thumb amin'ny Chrome, Safari */
+  /* input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background-color: #ff6f61;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+  } */ 
+  
+  /* Custom thumb amin'ny Firefox */
+  /* input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background-color: #ff6f61;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  } */
+  
+  input[type="range"]::-moz-range-thumb:hover {
+    transform: scale(1.2);
+  }
+}
+
+/* tailwind components */
+@layer components {
+  .custom-input {
+    @apply  w-full focus:border-[1.4px] px-4 focus:shadow-sm focus:border-gray-100
+        border-gray-300 mb-4 placeholder:text-slate-400 focus:ring-0 bg-white/90 ;
+  }
+  .signup-label {
+    @apply font-semibold text-gray-600 inline text-lg;
+  }
+  .active {
+    @apply text-blue-500 bg-gray-100 md:bg-gray-200 !font-bold;
+  }
+
+  .custom-invisible {
+    @apply hidden pointer-events-none opacity-0;
+  }
+  .custom-transition {
+    @apply transition-opacity duration-300 ease-in-out;
+  }
+  .input-text {
+    @apply ring-0 outline-hidden border-gray-300 border focus:border-gray-400 transition-all duration-200 ease-in-out;
+  }
+  .cta {
+    @apply bg-gradient-to-br from-[#8E44AD] hover:opacity-80 transition-opacity duration-300 to-[#00BFFF]
+  }
+}
+
+/* CSS Vanilla Class */
+@layer utilities {
+  .container {
+    margin-inline: auto;
+    padding-inline: 2rem;
+    margin: 0 auto;
+  }
+  /* animate rolling */
+  #roller {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: block;
+    margin: 15px auto;
+    position: relative;
+    left: -100px;
+    box-sizing: border-box;
+    animation: shadowRolling 2s linear infinite;
+  }
+
+  @keyframes shadowRolling {
+    0% {
+      box-shadow: 0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0),
+        0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+    }
+    12% {
+      box-shadow: 100px 0 gray, 0px 0 rgba(255, 255, 255, 0),
+        0px 0 rgba(255, 255, 255, 0), 0px 0 rgba(255, 255, 255, 0);
+    }
+    25% {
+      box-shadow: 110px 0 gray, 100px 0 gray, 0px 0 rgba(255, 255, 255, 0),
+        0px 0 rgba(255, 255, 255, 0);
+    }
+    36% {
+      box-shadow: 120px 0 gray, 110px 0 gray, 100px 0 gray,
+        0px 0 rgba(255, 255, 255, 0);
+    }
+    50% {
+      box-shadow: 130px 0 gray, 120px 0 gray, 110px 0 gray, 100px 0 gray;
+    }
+    62% {
+      box-shadow: 200px 0 rgba(255, 255, 255, 0), 130px 0 gray, 120px 0 gray,
+        110px 0 gray;
+    }
+    75% {
+      box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
+        130px 0 gray, 120px 0 gray;
+    }
+    87% {
+      box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
+        200px 0 rgba(255, 255, 255, 0), 130px 0 gray;
+    }
+    100% {
+      box-shadow: 200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0),
+        200px 0 rgba(255, 255, 255, 0), 200px 0 rgba(255, 255, 255, 0);
+    }
+  }
+
+  /* song playing */
+  .player {
+    width: 8px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 10px;
+    position: relative;
+    background: currentColor;
+    color: #fff;
+    box-sizing: border-box;
+    animation: animplayer 0.3s 0.3s linear infinite alternate;
+  }
+  .player::after,
+  .player::before {
+    content: "";
+    box-sizing: border-box;
+    width: 8px;
+    height: 20px;
+    border-radius: 4px;
+    background: currentColor;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    animation: animplayer1 0.3s 0.45s linear infinite alternate;
+  }
+  .player::before {
+    left: -20px;
+    animation-delay: 0s;
+  }
+
+  @keyframes animplayer {
+    0% {
+      height: 40px;
+      transform: translateY(0);
+    }
+    100% {
+      height: 10px;
+      transform: translateY(30px);
+    }
+  }
+
+  @keyframes animplayer1 {
+    0% {
+      height: 48px;
+    }
+    100% {
+      height: 4.8px;
+    }
+  }
+
+  /* animate simple */
+  .simple {
+    width: 100%;
+    height: 4.8px;
+    display: inline-block;
+    position: relative;
+    background: rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+  }
+  .simple::after {
+    content: "";
+    width: 192px;
+    height: 4.8px;
+    background: rgb(179, 178, 178);
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    animation: simple 1.8s linear infinite;
+  }
+
+  @keyframes simple {
+    0% {
+      left: 0;
+      transform: translateX(-100%);
+    }
+    100% {
+      left: 100%;
+      transform: translateX(0%);
+    }
+  }
+}

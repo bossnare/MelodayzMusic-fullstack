@@ -1,0 +1,10 @@
+controllers:
+  resource:
+    path: ../src/Controller/
+    namespace: App\Controller
+  type: attribute
+  # api/config/routes.yaml
+  # raha mila manampy route hafa dia ampidiro eto
+auth:
+  path: /api/login
+  methods: ["POST"]

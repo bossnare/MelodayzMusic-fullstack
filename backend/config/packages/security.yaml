@@ -1,0 +1,88 @@
+security:
+    # # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    # password_hashers:
+    #     Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
+    # # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    # providers:
+    #     users_in_memory: { memory: null }
+    # firewalls:
+    #     dev:
+    #         pattern: ^/(_(profiler|wdt)|css|images|js)/
+    #         security: false
+    #     main:
+    #         lazy: true
+    #         provider: users_in_memory
+
+    #         # activate different ways to authenticate
+    #         # https://symfony.com/doc/current/security.html#the-firewall
+
+    #         # https://symfony.com/doc/current/security/impersonating_user.html
+    #         # switch_user: true
+
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+            algorithm: argon2id
+            memory_cost: 65536
+            time_cost: 4
+            key_length: 32
+
+    providers:
+        users:
+            id:
+                App\Security\UserProvider
+                # class: App\Document\User
+                # property: email # izany hoe mila misy/asiana  proprieté iray mitondra email an'ny mpampiasa amin'ny token ohatra: username: e@gmail.com
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        # api:
+        #     pattern: ^/api/
+        #     stateless: true
+        #     jwt: ~
+
+        # login:
+        #     pattern: ^/api/login
+        #     security: false
+        main:
+            stateless: true
+            provider: users
+            json_login:
+                check_path: /api/login # ity ilay path any @ route.yaml
+                username_path: email
+                password_path: password
+                # ity ny handler raha mahomby ny login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                #  ity ny handler raha tsy mahomby ny login
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            jwt: ~
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/$, roles: PUBLIC_ACCESS } # Swagger UI
+        - { path: ^/docs, roles: PUBLIC_ACCESS } # Swagger UI docs
+        - { path: ^/api/login, roles: PUBLIC_ACCESS } # Login route
+        - { path: ^/api/users/register, roles: PUBLIC_ACCESS } # register
+        - { path: ^/api, roles: PUBLIC_ACCESS } # API Swagger docs
+
+        - { path: ^/api/users/$, methods: [GET], roles: ROLE_ADMIN } #admin ihany afaka mahita mpampiasa rehetra
+        - { path: ^/api/users/$, methods: [POST], roles: ROLE_ADMIN } #  admin ihany afaka manampy mpampiasa
+        - { path: ^/api/moi, roles: IS_AUTHENTICATED_FULLY } # user authenticated
+        - { path: ^/api/users/\d+, methods: [PUT, PATCH], roles: ROLE_USER }
+        - { path: ^/api/users/\d+, methods: [DELETE], roles: ROLE_USER }
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY } # manakatona ny API rehetra
+
+# when@test:
+#     security:
+#         password_hashers:
+#             # By default, password hashers are resource intensive and take time. This is
+#             # important to generate secure password hashes. In tests however, secure hashes
+#             # are not important, waste resources and increase test times. The following
+#             # reduces the work factor to the lowest possible values.
+#             ? Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
+#             : algorithm: auto
+#               cost: 4 # Lowest possible value for bcrypt
+#               time_cost: 3 # Lowest possible value for argon
+#               memory_cost: 10 # Lowest possible value for argon

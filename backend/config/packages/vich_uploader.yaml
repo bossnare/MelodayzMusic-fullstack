@@ -1,0 +1,29 @@
+vich_uploader:
+    db_driver: mongodb
+    metadata:
+        type: attribute
+
+    mappings:
+        songs:
+            uri_prefix: /uploads/songs
+            upload_destination: "%kernel.project_dir%/var/uploads/songs"
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        covers:
+            uri_prefix: /uploads/covers
+            upload_destination: "%kernel.project_dir%/var/uploads/covers"
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        profile_pictures:
+            uri_prefix: /uploads/profiles
+            upload_destination: "%kernel.project_dir%/var/uploads/profiles"
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
